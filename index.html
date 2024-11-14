@@ -1,15 +1,53 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Test Form</title>
+    <title>Online Form</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('myForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+                var formData = {
+                    name: document.getElementById('name').value,
+                    email: document.getElementById('email').value
+                };
+                fetch('https://script.google.com/macros/s/AKfycbxjddmlH3SOixo-nIZje4qbxOlma5SBjevqpo4GBr_t3y0W6X0-4tX5z_JL99JC6oGdgg/exec', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*'
+                    },
+                    body: JSON.stringify(formData)
+                })
+                .then(response => response.text())
+                .then(data => {
+                    console.log(data);
+                    document.getElementById('successMessage').innerText = 'Form submitted successfully!';
+                    document.getElementById('successMessage').style.display = 'block';
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById('successMessage').innerText = 'There was an error submitting the form.';
+                    document.getElementById('successMessage').style.display = 'block';
+                });
+            });
+        });
+    </script>
+    <style>
+        #successMessage {
+            display: none;
+            color: green;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
-    <form action="https://mywall662.github.io/testform/script.js" method="POST">
+    <form id="myForm">
         <label for="name">Name:</label>
-        <input type="text" id="name" name="name"><br><br>
+        <input type="text" id="name" name="name" required><br><br>
         <label for="email">Email:</label>
-        <input type="email" id="email" name="email"><br><br>
+        <input type="email" id="email" name="email" required><br><br>
         <input type="submit" value="Submit">
     </form>
+    <div id="successMessage"></div>
 </body>
 </html>
