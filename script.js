@@ -4,7 +4,7 @@ document.getElementById('myForm').addEventListener('submit', function(event) {
         name: document.getElementById('name').value,
         email: document.getElementById('email').value
     };
-    fetch('https://script.google.com/macros/s/AKfycbzP94x0sxlmg-M60xBhLOaefujzJHjpjlLTx0hh797e2a3LkGVTJPPB9FpVhPPObBoyxg/exec', {
+    fetch('https://script.google.com/macros/s/AKfycbxjddmlH3SOixo-nIZje4qbxOlma5SBjevqpo4GBr_t3y0W6X0-4tX5z_JL99JC6oGdgg/exec', {
         method: 'POST',
         body: JSON.stringify(formData)
     }).then(response => response.text())
